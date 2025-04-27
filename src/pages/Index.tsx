@@ -1,13 +1,19 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
-import TilingSystem from "../components/TilingSystem";
+import Navbar from "../components/Navbar";
+import HeroSection from "../components/HeroSection";
+import ExperienceTimeline from "../components/ExperienceTimeline";
+import ProjectsShowcase from "../components/ProjectsShowcase";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <ParticlesBackground />
-      <TilingSystem />
+      <Navbar />
+      <HeroSection />
+      <ExperienceTimeline />
+      <ProjectsShowcase />
     </div>
   );
 };
