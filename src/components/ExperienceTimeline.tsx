@@ -91,19 +91,19 @@ const ExperienceTimeline: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2, duration: 0.6 }}
                 className="relative mb-16 last:mb-0 pl-10"
+                onMouseEnter={() => handleSelectItem(item.id)}
               >
                 <div
-                  className={`absolute left-0 w-9 h-9 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 ${
+                  className={`absolute left-0 w-9 h-9 rounded-full flex items-center justify-center transition-all duration-300 ${
                     item.isActive
                       ? "bg-neon neon-glow"
                       : "bg-secondary border border-white/10"
                   }`}
-                  onClick={() => handleSelectItem(item.id)}
                 >
                   <div className={`w-3 h-3 rounded-full ${item.isActive ? "bg-black" : "bg-white/50"}`}></div>
                 </div>
                 
-                <div onClick={() => handleSelectItem(item.id)} className="cursor-pointer">
+                <div className="cursor-pointer">
                   <h3 className={`text-xl font-medium mb-1 ${item.isActive ? "text-neon" : "text-white"}`}>
                     {item.company}
                   </h3>
@@ -122,7 +122,13 @@ const ExperienceTimeline: React.FC = () => {
             className="md:col-span-3"
           >
             {activeItem && (
-              <div className="glass p-8 rounded-2xl">
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="glass p-8 rounded-2xl"
+              >
                 <div className="flex items-start gap-4 mb-6">
                   <div className="w-12 h-12 rounded-lg glass flex items-center justify-center">
                     <img src={activeItem.logo} alt={activeItem.company} className="w-8 h-8" />
@@ -141,7 +147,7 @@ const ExperienceTimeline: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             )}
           </motion.div>
         </div>
