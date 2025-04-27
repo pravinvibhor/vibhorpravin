@@ -1,9 +1,10 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
 import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
-import NavigationTiles from "../components/NavigationTiles";
+import ExperienceTimeline from "../components/ExperienceTimeline";
+import ProjectsShowcase from "../components/ProjectsShowcase";
 
 const Index = () => {
   return (
@@ -11,7 +12,8 @@ const Index = () => {
       <ParticlesBackground />
       <Navbar />
       <HeroSection />
-      <NavigationTiles />
+      <ExperienceTimeline />
+      <ProjectsShowcase />
     </div>
   );
 };
