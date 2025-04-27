@@ -4,6 +4,7 @@ import ParticlesBackground from "../components/ParticlesBackground";
 import HeroSection from "../components/HeroSection";
 import ExperienceTimeline from "../components/ExperienceTimeline";
 import ProjectsShowcase from "../components/ProjectsShowcase";
+import CertificationsSection from "../components/CertificationsSection";
 
 const Index = () => {
   return (
@@ -12,6 +13,7 @@ const Index = () => {
       <HeroSection />
       <ExperienceTimeline />
       <ProjectsShowcase />
+      <CertificationsSection />
     </div>
   );
 };
