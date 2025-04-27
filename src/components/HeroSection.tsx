@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
+import { Info } from "lucide-react";
 
 const HeroSection: React.FC = () => {
   const [displayText, setDisplayText] = useState("");
@@ -27,9 +29,27 @@ const HeroSection: React.FC = () => {
         transition={{ duration: 1 }}
         className="max-w-4xl"
       >
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
-          Vibhor Pravin
-        </h1>
+        <div className="flex items-center gap-3 mb-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white">
+            Vibhor Pravin
+          </h1>
+          <HoverCard>
+            <HoverCardTrigger asChild>
+              <button className="mt-2">
+                <Info className="w-6 h-6 text-neon hover:text-neon/80 transition-colors" />
+              </button>
+            </HoverCardTrigger>
+            <HoverCardContent className="w-80 glass border-neon/20" side="right">
+              <div className="space-y-2">
+                <h4 className="text-lg font-semibold text-white">About Me</h4>
+                <p className="text-sm text-white/70">
+                  A passionate professional with expertise in revenue generation, customer success, and product management. 
+                  Dedicated to driving business growth through strategic initiatives and customer-centric approaches.
+                </p>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
+        </div>
         <div className="h-8">
           <p className="text-2xl md:text-3xl font-medium text-neon lg:text-3xl">
             {displayText}
