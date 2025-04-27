@@ -18,7 +18,7 @@ const ExperienceTimeline: React.FC = () => {
       company: "MarketsandMarkets",
       logo: "/lovable-uploads/5f05e48d-2ff3-4666-a8d9-9cd4bfe8c140.png",
       role: "Client Growth Partner",
-      duration: "2022 - Present",
+      duration: "2024 - 2025",
       description: [
         "Managed IT consulting & growth projects (US/EMEA)",
         "Delivered advisory services & built opportunity pipelines of over $100k monthly",
@@ -31,7 +31,7 @@ const ExperienceTimeline: React.FC = () => {
       company: "Quolum",
       logo: "/lovable-uploads/02f50d70-18ec-4b26-ab83-a2d0ee8b1bd8.png",
       role: "Customer Success Manager",
-      duration: "2020 - 2022",
+      duration: "2022 - 2024",
       description: [
         "Established Customer Success department; managed all India & US clients",
         "Achieved 90%+ client retention rate through enhanced service & value",
@@ -44,7 +44,7 @@ const ExperienceTimeline: React.FC = () => {
       company: "ICICI Bank",
       logo: "/lovable-uploads/fd929336-e4cc-4629-803f-a0565988c21b.png",
       role: "Accounts Manager",
-      duration: "2018 - 2020",
+      duration: "2021 - 2022",
       description: [
         "Led New Client Acquisition (NCA) campaign for South India resulting in an increase of over 5% Q-o-Q growth",
         "Managed corporate banking relationships with orgs generating over INR 50 crore revenue",
