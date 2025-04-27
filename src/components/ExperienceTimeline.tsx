@@ -16,40 +16,41 @@ const ExperienceTimeline: React.FC = () => {
   const [timelineItems, setTimelineItems] = useState<TimelineItem[]>([
     {
       id: 1,
-      company: "Tech Corp",
+      company: "MarketsandMarkets",
       logo: "/placeholder.svg",
-      role: "Senior Developer",
+      role: "Client Growth Partner",
       duration: "2022 - Present",
       description: [
-        "Led the development of core product features",
-        "Implemented CI/CD pipeline reducing deployment time by 40%",
-        "Mentored junior developers and conducted code reviews"
+        "Managed IT consulting & growth projects (US/EMEA)",
+        "Delivered advisory services & built $100k+ sales pipelines",
+        "Designed GTM strategies; expanded TAM for Fortune 2000 clients"
       ],
       isActive: true,
     },
     {
       id: 2,
-      company: "Digital Agency",
+      company: "Quolum",
       logo: "/placeholder.svg",
-      role: "Web Developer",
+      role: "Customer Success Manager",
       duration: "2020 - 2022",
       description: [
-        "Developed responsive websites for various clients",
-        "Created a custom CMS solution using React and Node.js",
-        "Optimized site performance and SEO"
+        "Established Customer Success department; managed all India & US clients",
+        "Achieved 90%+ client retention rate through enhanced service & value",
+        "Launched new SaaS procurement service delivering over $300k in client savings",
+        "Used data to drive product adoption and released various features"
       ],
       isActive: false,
     },
     {
       id: 3,
-      company: "Startup Inc",
+      company: "ICICI Bank",
       logo: "/placeholder.svg",
-      role: "Frontend Engineer",
+      role: "Accounts Manager",
       duration: "2018 - 2020",
       description: [
-        "Built the company's flagship product interface",
-        "Implemented user authentication and data visualization",
-        "Reduced bundle size by 35% through code optimization"
+        "Led New Client Acquisition (NCA) campaign for South India with a 5% Q-o-Q growth",
+        "Managed corporate banking relationships with orgs generating over INR 50 crore revenue",
+        "Strategised and executed sales strategies for corporate onboarding"
       ],
       isActive: false,
     },
