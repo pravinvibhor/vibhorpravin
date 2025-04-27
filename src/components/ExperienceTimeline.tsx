@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -17,38 +16,37 @@ const ExperienceTimeline: React.FC = () => {
     {
       id: 1,
       company: "MarketsandMarkets",
-      logo: "/placeholder.svg",
+      logo: "/lovable-uploads/5f05e48d-2ff3-4666-a8d9-9cd4bfe8c140.png",
       role: "Client Growth Partner",
       duration: "2022 - Present",
       description: [
         "Managed IT consulting & growth projects (US/EMEA)",
-        "Delivered advisory services & built $100k+ sales pipelines",
-        "Designed GTM strategies; expanded TAM for Fortune 2000 clients"
+        "Delivered advisory services & built opportunity pipelines of over $100k monthly",
+        "Designed GTM strategies and expanded TAM for Fortune 2000 clients"
       ],
       isActive: true,
     },
     {
       id: 2,
       company: "Quolum",
-      logo: "/placeholder.svg",
+      logo: "/lovable-uploads/02f50d70-18ec-4b26-ab83-a2d0ee8b1bd8.png",
       role: "Customer Success Manager",
       duration: "2020 - 2022",
       description: [
         "Established Customer Success department; managed all India & US clients",
         "Achieved 90%+ client retention rate through enhanced service & value",
-        "Launched new SaaS procurement service delivering over $300k in client savings",
-        "Used data to drive product adoption and released various features"
+        "Launched new SaaS procurement service delivering over $300k in client savings"
       ],
       isActive: false,
     },
     {
       id: 3,
       company: "ICICI Bank",
-      logo: "/placeholder.svg",
+      logo: "/lovable-uploads/fd929336-e4cc-4629-803f-a0565988c21b.png",
       role: "Accounts Manager",
       duration: "2018 - 2020",
       description: [
-        "Led New Client Acquisition (NCA) campaign for South India with a 5% Q-o-Q growth",
+        "Led New Client Acquisition (NCA) campaign for South India resulting in an increase of over 5% Q-o-Q growth",
         "Managed corporate banking relationships with orgs generating over INR 50 crore revenue",
         "Strategised and executed sales strategies for corporate onboarding"
       ],
