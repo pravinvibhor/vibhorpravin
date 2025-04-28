@@ -4,13 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Book, Award, FileText, ExternalLink } from "lucide-react"; 
 import { ScrollArea } from "./ui/scroll-area";
 import { Button } from "./ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 interface Certification {
   id: number;
@@ -97,7 +90,7 @@ const CertificationsSection: React.FC = () => {
   // Close detailed view when clicking outside the certification
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (detailedViewActive) {
+      if (detailedViewActive && containerRef.current) {
         setDetailedViewActive(false);
       }
     };
@@ -176,6 +169,7 @@ const CertificationsSection: React.FC = () => {
     if (position === 0) {
       setSelectedCertification(id);
       setDetailedViewActive(true);
+      console.log("Opening detailed view for certification ID:", id);
     } else {
       // Side tiles navigate the carousel
       handleNavigate(position);
@@ -230,106 +224,79 @@ const CertificationsSection: React.FC = () => {
           <div 
             ref={containerRef} 
             className={`preserve-3d relative w-full h-full ${detailedViewActive ? 'backdrop-blur-sm' : ''}`}
+            onClick={(e) => {
+              // This is to handle clicks on the container (outside of any specific tile)
+              if (detailedViewActive) {
+                e.stopPropagation();
+                setDetailedViewActive(false);
+              }
+            }}
           >
-            <AnimatePresence mode="wait">
-              {/* Detailed View Modal */}
-              {detailedViewActive && selectedCert && (
-                <motion.div
-                  key="detailed-view"
-                  className="absolute top-0 left-0 right-0 z-50 mx-auto w-full h-full flex items-center justify-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setDetailedViewActive(false);
+            {/* Detailed View Modal - Rendered completely separate from carousel */}
+            {detailedViewActive && selectedCert && (
+              <div
+                className="absolute top-0 left-0 right-0 z-50 mx-auto w-full h-full flex items-center justify-center"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setDetailedViewActive(false);
+                }}
+              >
+                <div
+                  className={`detailed-certificate-card w-[400px] h-[400px] rounded-xl glass-card ${selectedColorScheme?.bgGradient} ${selectedColorScheme?.borderColor} ${selectedColorScheme?.glowColor} border-opacity-70 p-8`}
+                  style={{
+                    transform: 'rotateY(180deg) translateZ(150px) scale(1.5)',
+                    transformStyle: 'preserve-3d',
+                    transition: 'all 0.5s ease-in-out',
+                    backfaceVisibility: 'hidden',
                   }}
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <motion.div
-                    className={`w-[400px] h-[400px] backface-hidden rounded-xl glass-card ${selectedColorScheme?.bgGradient} ${selectedColorScheme?.borderColor} ${selectedColorScheme?.glowColor} border-opacity-70 flex flex-col justify-center items-center p-8`}
-                    initial={{ 
-                      opacity: 1,
-                      scale: 1,
-                      rotateY: 0,
-                      z: 0
-                    }}
-                    animate={{ 
-                      opacity: 1,
-                      scale: 1.5,
-                      rotateY: 180,
-                      z: 150
-                    }}
-                    exit={{ 
-                      opacity: 1,
-                      scale: 1,
-                      rotateY: 0,
-                      z: 0
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 25,
-                      duration: 0.6
-                    }}
-                    style={{
-                      transformStyle: "preserve-3d",
-                      backfaceVisibility: "hidden",
-                    }}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {/* Back face content */}
-                    <div 
-                      className="absolute inset-0 rounded-xl flex flex-col justify-center items-center p-8"
-                      style={{ 
-                        transform: "rotateY(180deg)",
-                        backfaceVisibility: "hidden", 
-                      }}
-                    >
-                      <div className={`${selectedColorScheme?.accentColor} mb-6`}>
-                        <FileText className="h-10 w-10" />
-                      </div>
-                      
-                      <h3 className="text-2xl font-bold mb-3 text-white text-center">
-                        {selectedCert.name}
-                      </h3>
-                      
-                      <p className="text-white/90 text-lg text-center mb-2">
-                        {selectedCert.organization}
-                      </p>
-                      
-                      <p className={`${selectedColorScheme?.accentColor} text-base font-medium mb-6`}>
-                        {selectedCert.date}
-                      </p>
-                      
-                      <ScrollArea className="h-32 w-full mb-6">
-                        <p className="text-white/90 text-sm text-center mb-4">
-                          {selectedCert.description}
-                        </p>
-                      </ScrollArea>
-                      
-                      <a 
-                        href={selectedCert.verificationUrl || "#"} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        onClick={handleLinkClick}
-                        className="mt-auto"
-                      >
-                        <Button 
-                          variant="outline" 
-                          className={`${selectedColorScheme?.accentColor} ${selectedColorScheme?.borderColor} hover:bg-white/10`}
-                        >
-                          <Book className="mr-2 h-4 w-4" />
-                          View Certificate
-                          <ExternalLink className="ml-1 h-3 w-3" />
-                        </Button>
-                      </a>
+                  <div className="flex flex-col justify-center items-center h-full">
+                    <div className={`${selectedColorScheme?.accentColor} mb-6`}>
+                      <FileText className="h-10 w-10" />
                     </div>
-                  </motion.div>
-                </motion.div>
-              )}
+                    
+                    <h3 className="text-2xl font-bold mb-3 text-white text-center">
+                      {selectedCert.name}
+                    </h3>
+                    
+                    <p className="text-white/90 text-lg text-center mb-2">
+                      {selectedCert.organization}
+                    </p>
+                    
+                    <p className={`${selectedColorScheme?.accentColor} text-base font-medium mb-6`}>
+                      {selectedCert.date}
+                    </p>
+                    
+                    <ScrollArea className="h-32 w-full mb-6">
+                      <p className="text-white/90 text-sm text-center mb-4">
+                        {selectedCert.description}
+                      </p>
+                    </ScrollArea>
+                    
+                    <a 
+                      href={selectedCert.verificationUrl || "#"} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={handleLinkClick}
+                      className="mt-auto"
+                    >
+                      <Button 
+                        variant="outline" 
+                        className={`${selectedColorScheme?.accentColor} ${selectedColorScheme?.borderColor} hover:bg-white/10`}
+                      >
+                        <Book className="mr-2 h-4 w-4" />
+                        View Certificate
+                        <ExternalLink className="ml-1 h-3 w-3" />
+                      </Button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
               
-              {/* Regular Carousel View */}
+            {/* Regular Carousel View - Only shown when detailed view is not active */}
+            <AnimatePresence mode="sync">
               {!detailedViewActive && getVisibleCards().map((card) => {
                 const colorScheme = getColorScheme(card.colorScheme);
                 const isCenterCard = card.position === 0;
@@ -348,6 +315,11 @@ const CertificationsSection: React.FC = () => {
                     y: isCenterCard ? -20 : 0, // Move center card up
                     zIndex: 5 - Math.abs(card.position) * 1,
                     filter: `brightness(${isCenterCard ? 1.1 : 1 - Math.abs(card.position) * 0.2})`,
+                  }}
+                  exit={{ 
+                    opacity: 0,
+                    x: card.position < 0 ? -500 : 500,
+                    transition: { duration: 0.3 }
                   }}
                   transition={{
                     type: "spring",
@@ -368,7 +340,6 @@ const CertificationsSection: React.FC = () => {
                     transformStyle: "preserve-3d",
                   }}
                 >
-                  {/* Front face */}
                   <div 
                     className={`absolute inset-0 rounded-xl glass-card ${colorScheme.bgGradient} ${colorScheme.borderColor} ${
                       isCenterCard ? `${colorScheme.glowColor} border-opacity-70` : 'border-opacity-30'
