@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Book, Award, FileText, ExternalLink } from "lucide-react"; 
@@ -87,7 +86,6 @@ const CertificationsSection: React.FC = () => {
   const [isDetailedViewOpen, setIsDetailedViewOpen] = useState(false);
   const [selectedCertification, setSelectedCertification] = useState<Certification | null>(null);
 
-  // Function to get color scheme based on card type
   const getColorScheme = (scheme: string) => {
     switch(scheme) {
       case "blue":
@@ -135,19 +133,18 @@ const CertificationsSection: React.FC = () => {
     }
   };
 
-  // Calculate visible cards with proper wrapping
   const getVisibleCards = () => {
     const visibleCards = [];
     for (let i = 0; i < 5; i++) {
       const index = (activeIndex + i) % certifications.length;
       visibleCards.push({
         ...certifications[index],
-        position: i - 2 // -2, -1, 0, 1, 2
+        position: i - 2
       });
     }
     return visibleCards;
   };
-  
+
   const handleOpenDetailedView = (certification: Certification) => {
     console.log("Opening detailed view for certification ID:", certification.id);
     setSelectedCertification(certification);
@@ -157,23 +154,19 @@ const CertificationsSection: React.FC = () => {
   const handleCardClick = (card: Certification & { position: number }, e: React.MouseEvent) => {
     e.stopPropagation();
     
-    // Only center tile opens detailed view
     if (card.position === 0) {
       handleOpenDetailedView(card);
     } else {
-      // Side tiles navigate the carousel
       handleNavigate(card.position);
     }
   };
 
   const handleNavigate = (position: number) => {
-    // If clicking left tiles (position -2 or -1)
     if (position < 0) {
       setActiveIndex((prev) => 
         prev - 1 < 0 ? certifications.length - 1 : prev - 1
       );
     } 
-    // If clicking right tiles (position 1 or 2)
     else if (position > 0) {
       setActiveIndex((prev) => 
         prev + 1 >= certifications.length ? 0 : prev + 1
@@ -181,7 +174,6 @@ const CertificationsSection: React.FC = () => {
     }
   };
 
-  // Stop propagation for links in the detailed view
   const handleLinkClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -199,14 +191,12 @@ const CertificationsSection: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white">
-            Professional <span className="text-neon">Certifications</span>
+            <span className="text-neon">Certifications</span>
           </h2>
         </motion.div>
 
-        {/* 3D Carousel Container */}
         <div className="relative h-[450px] perspective-1000 mt-16 md:mt-16">
           <div className="preserve-3d relative w-full h-full">
-            {/* Regular Carousel View */}
             <AnimatePresence mode="sync">
               {getVisibleCards().map((card) => {
                 const colorScheme = getColorScheme(card.colorScheme);
@@ -222,8 +212,8 @@ const CertificationsSection: React.FC = () => {
                   animate={{ 
                     opacity: isDetailedViewOpen ? 0 : isEdge ? 0.5 : isAdjacent ? 0.8 : 1,
                     scale: isCenterCard ? 1.2 : isAdjacent ? 0.85 : 0.7,
-                    x: `${card.position * 240}px`, // Increased spacing between cards
-                    y: isCenterCard ? -20 : 0, // Move center card up
+                    x: `${card.position * 240}px`,
+                    y: isCenterCard ? -20 : 0,
                     zIndex: 5 - Math.abs(card.position) * 1,
                     filter: `brightness(${isCenterCard ? 1.1 : 1 - Math.abs(card.position) * 0.2})`,
                   }}
@@ -257,7 +247,6 @@ const CertificationsSection: React.FC = () => {
                       <Award className="h-10 w-10" />
                     </div>
                     
-                    {/* Only show full text details on center card */}
                     {isCenterCard ? (
                       <>
                         <h3 className="text-xl font-medium mb-3 text-white text-center">{card.name}</h3>
@@ -284,7 +273,6 @@ const CertificationsSection: React.FC = () => {
         </div>
       </div>
       
-      {/* Background Accents */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isDetailedViewOpen ? 0.2 : 0.4 }}
@@ -292,7 +280,6 @@ const CertificationsSection: React.FC = () => {
         className="absolute bottom-10 left-10 w-72 h-72 rounded-full bg-neon-purple/5 blur-[100px] animate-pulse"
       />
 
-      {/* Visual Indicator for navigation */}
       {!isDetailedViewOpen && (
         <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-2 mt-8">
           {Array.from({ length: Math.min(certifications.length, 7) }).map((_, index) => (
@@ -309,7 +296,6 @@ const CertificationsSection: React.FC = () => {
         </div>
       )}
 
-      {/* Detailed Certificate View Dialog */}
       {selectedCertification && (
         <Dialog 
           open={isDetailedViewOpen} 
@@ -318,7 +304,7 @@ const CertificationsSection: React.FC = () => {
             if (!open) setSelectedCertification(null);
           }}
         >
-          <DialogContent className="p-0 border-0 max-w-md bg-transparent shadow-none">
+          <DialogContent className="p-0 border-0 max-w-md bg-transparent shadow-none" hideCloseButton>
             <DetailedCertificateView 
               certification={selectedCertification}
               onClose={() => setIsDetailedViewOpen(false)}
@@ -330,14 +316,12 @@ const CertificationsSection: React.FC = () => {
   );
 };
 
-// Separate component for detailed certificate view
 const DetailedCertificateView: React.FC<{
   certification: Certification;
   onClose: () => void;
 }> = ({ certification, onClose }) => {
   const colorScheme = getColorScheme(certification.colorScheme);
   
-  // Function to get color scheme based on card type
   function getColorScheme(scheme: string) {
     switch(scheme) {
       case "blue":
@@ -385,7 +369,6 @@ const DetailedCertificateView: React.FC<{
     }
   }
 
-  // Handle click on external link
   const handleLinkClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -401,10 +384,10 @@ const DetailedCertificateView: React.FC<{
       }}
       exit={{ opacity: 0, scale: 0.8, rotateY: 0 }}
       className="w-[400px] h-[400px] mx-auto"
+      onClick={(e) => e.stopPropagation()}
     >
       <div
         className={`w-full h-full rounded-xl glass-card ${colorScheme.bgGradient} ${colorScheme.borderColor} ${colorScheme.glowColor} border-opacity-70 p-8 flex flex-col justify-center items-center`}
-        onClick={(e) => e.stopPropagation()}
         style={{ transform: "rotateY(180deg)" }}
       >
         <div className={`${colorScheme.accentColor} mb-6`}>
