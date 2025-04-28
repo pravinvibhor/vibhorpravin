@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Book, Award, FileText, ExternalLink } from "lucide-react"; 
 import { ScrollArea } from "./ui/scroll-area";
 import { Button } from "./ui/button";
+import { Dialog, DialogContent } from "./ui/dialog";
 
 interface Certification {
   id: number;
@@ -83,23 +84,8 @@ const CertificationsSection: React.FC = () => {
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [detailedViewActive, setDetailedViewActive] = useState(false);
-  const [selectedCertification, setSelectedCertification] = useState<number | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Close detailed view when clicking outside the certification
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (detailedViewActive && containerRef.current) {
-        setDetailedViewActive(false);
-      }
-    };
-
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [detailedViewActive]);
+  const [isDetailedViewOpen, setIsDetailedViewOpen] = useState(false);
+  const [selectedCertification, setSelectedCertification] = useState<Certification | null>(null);
 
   // Function to get color scheme based on card type
   const getColorScheme = (scheme: string) => {
@@ -162,17 +148,21 @@ const CertificationsSection: React.FC = () => {
     return visibleCards;
   };
   
-  const handleOpenDetailedView = (id: number, position: number, e: React.MouseEvent) => {
+  const handleOpenDetailedView = (certification: Certification) => {
+    console.log("Opening detailed view for certification ID:", certification.id);
+    setSelectedCertification(certification);
+    setIsDetailedViewOpen(true);
+  };
+
+  const handleCardClick = (card: Certification & { position: number }, e: React.MouseEvent) => {
     e.stopPropagation();
     
     // Only center tile opens detailed view
-    if (position === 0) {
-      setSelectedCertification(id);
-      setDetailedViewActive(true);
-      console.log("Opening detailed view for certification ID:", id);
+    if (card.position === 0) {
+      handleOpenDetailedView(card);
     } else {
       // Side tiles navigate the carousel
-      handleNavigate(position);
+      handleNavigate(card.position);
     }
   };
 
@@ -196,12 +186,6 @@ const CertificationsSection: React.FC = () => {
     e.stopPropagation();
   };
 
-  const selectedCert = selectedCertification !== null 
-    ? certifications.find(cert => cert.id === selectedCertification)
-    : null;
-  
-  const selectedColorScheme = selectedCert ? getColorScheme(selectedCert.colorScheme) : null;
-
   return (
     <section 
       className="py-20 px-4 md:px-10 lg:px-20 relative overflow-hidden" 
@@ -221,83 +205,10 @@ const CertificationsSection: React.FC = () => {
 
         {/* 3D Carousel Container */}
         <div className="relative h-[450px] perspective-1000 mt-16 md:mt-16">
-          <div 
-            ref={containerRef} 
-            className={`preserve-3d relative w-full h-full ${detailedViewActive ? 'backdrop-blur-sm' : ''}`}
-            onClick={(e) => {
-              // This is to handle clicks on the container (outside of any specific tile)
-              if (detailedViewActive) {
-                e.stopPropagation();
-                setDetailedViewActive(false);
-              }
-            }}
-          >
-            {/* Detailed View Modal - Rendered completely separate from carousel */}
-            {detailedViewActive && selectedCert && (
-              <div
-                className="absolute top-0 left-0 right-0 z-50 mx-auto w-full h-full flex items-center justify-center"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setDetailedViewActive(false);
-                }}
-              >
-                <div
-                  className={`detailed-certificate-card w-[400px] h-[400px] rounded-xl glass-card ${selectedColorScheme?.bgGradient} ${selectedColorScheme?.borderColor} ${selectedColorScheme?.glowColor} border-opacity-70 p-8`}
-                  style={{
-                    transform: 'rotateY(180deg) translateZ(150px) scale(1.5)',
-                    transformStyle: 'preserve-3d',
-                    transition: 'all 0.5s ease-in-out',
-                    backfaceVisibility: 'hidden',
-                  }}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="flex flex-col justify-center items-center h-full">
-                    <div className={`${selectedColorScheme?.accentColor} mb-6`}>
-                      <FileText className="h-10 w-10" />
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold mb-3 text-white text-center">
-                      {selectedCert.name}
-                    </h3>
-                    
-                    <p className="text-white/90 text-lg text-center mb-2">
-                      {selectedCert.organization}
-                    </p>
-                    
-                    <p className={`${selectedColorScheme?.accentColor} text-base font-medium mb-6`}>
-                      {selectedCert.date}
-                    </p>
-                    
-                    <ScrollArea className="h-32 w-full mb-6">
-                      <p className="text-white/90 text-sm text-center mb-4">
-                        {selectedCert.description}
-                      </p>
-                    </ScrollArea>
-                    
-                    <a 
-                      href={selectedCert.verificationUrl || "#"} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      onClick={handleLinkClick}
-                      className="mt-auto"
-                    >
-                      <Button 
-                        variant="outline" 
-                        className={`${selectedColorScheme?.accentColor} ${selectedColorScheme?.borderColor} hover:bg-white/10`}
-                      >
-                        <Book className="mr-2 h-4 w-4" />
-                        View Certificate
-                        <ExternalLink className="ml-1 h-3 w-3" />
-                      </Button>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            )}
-              
-            {/* Regular Carousel View - Only shown when detailed view is not active */}
+          <div className="preserve-3d relative w-full h-full">
+            {/* Regular Carousel View */}
             <AnimatePresence mode="sync">
-              {!detailedViewActive && getVisibleCards().map((card) => {
+              {getVisibleCards().map((card) => {
                 const colorScheme = getColorScheme(card.colorScheme);
                 const isCenterCard = card.position === 0;
                 const isAdjacent = Math.abs(card.position) === 1;
@@ -309,7 +220,7 @@ const CertificationsSection: React.FC = () => {
                   className={`absolute top-0 left-0 right-0 mx-auto w-[280px] h-[330px] cursor-pointer`}
                   initial={{ opacity: 0 }}
                   animate={{ 
-                    opacity: isEdge ? 0.5 : isAdjacent ? 0.8 : 1,
+                    opacity: isDetailedViewOpen ? 0 : isEdge ? 0.5 : isAdjacent ? 0.8 : 1,
                     scale: isCenterCard ? 1.2 : isAdjacent ? 0.85 : 0.7,
                     x: `${card.position * 240}px`, // Increased spacing between cards
                     y: isCenterCard ? -20 : 0, // Move center card up
@@ -326,7 +237,7 @@ const CertificationsSection: React.FC = () => {
                     stiffness: 300,
                     damping: 25
                   }}
-                  onClick={(e) => handleOpenDetailedView(card.id, card.position, e)}
+                  onClick={(e) => handleCardClick(card, e)}
                   whileHover={isCenterCard ? { 
                     scale: 1.25,
                     y: -30,
@@ -336,9 +247,6 @@ const CertificationsSection: React.FC = () => {
                     y: -10,
                     transition: { duration: 0.3 }
                   } : {}}
-                  style={{
-                    transformStyle: "preserve-3d",
-                  }}
                 >
                   <div 
                     className={`absolute inset-0 rounded-xl glass-card ${colorScheme.bgGradient} ${colorScheme.borderColor} ${
@@ -379,13 +287,13 @@ const CertificationsSection: React.FC = () => {
       {/* Background Accents */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: detailedViewActive ? 0.2 : 0.4 }}
+        animate={{ opacity: isDetailedViewOpen ? 0.2 : 0.4 }}
         transition={{ delay: 0.5, duration: 1.5 }}
         className="absolute bottom-10 left-10 w-72 h-72 rounded-full bg-neon-purple/5 blur-[100px] animate-pulse"
       />
 
       {/* Visual Indicator for navigation */}
-      {!detailedViewActive && (
+      {!isDetailedViewOpen && (
         <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-2 mt-8">
           {Array.from({ length: Math.min(certifications.length, 7) }).map((_, index) => (
             <div 
@@ -400,7 +308,145 @@ const CertificationsSection: React.FC = () => {
           ))}
         </div>
       )}
+
+      {/* Detailed Certificate View Dialog */}
+      {selectedCertification && (
+        <Dialog 
+          open={isDetailedViewOpen} 
+          onOpenChange={(open) => {
+            setIsDetailedViewOpen(open);
+            if (!open) setSelectedCertification(null);
+          }}
+        >
+          <DialogContent className="p-0 border-0 max-w-md bg-transparent shadow-none">
+            <DetailedCertificateView 
+              certification={selectedCertification}
+              onClose={() => setIsDetailedViewOpen(false)}
+            />
+          </DialogContent>
+        </Dialog>
+      )}
     </section>
+  );
+};
+
+// Separate component for detailed certificate view
+const DetailedCertificateView: React.FC<{
+  certification: Certification;
+  onClose: () => void;
+}> = ({ certification, onClose }) => {
+  const colorScheme = getColorScheme(certification.colorScheme);
+  
+  // Function to get color scheme based on card type
+  function getColorScheme(scheme: string) {
+    switch(scheme) {
+      case "blue":
+        return { 
+          bgGradient: "bg-gradient-to-br from-blue-900/80 to-blue-700/40",
+          borderColor: "border-blue-500/30", 
+          glowColor: "shadow-[0_0_15px_rgba(59,130,246,0.3)]",
+          accentColor: "text-blue-400"
+        };
+      case "purple":
+        return { 
+          bgGradient: "bg-gradient-to-br from-purple-900/80 to-purple-700/40",
+          borderColor: "border-purple-500/30", 
+          glowColor: "shadow-[0_0_15px_rgba(147,51,234,0.3)]",
+          accentColor: "text-purple-400"
+        };
+      case "teal":
+        return { 
+          bgGradient: "bg-gradient-to-br from-teal-900/80 to-teal-700/40",
+          borderColor: "border-teal-500/30", 
+          glowColor: "shadow-[0_0_15px_rgba(20,184,166,0.3)]",
+          accentColor: "text-teal-400"
+        };
+      case "green":
+        return { 
+          bgGradient: "bg-gradient-to-br from-green-900/80 to-green-700/40",
+          borderColor: "border-green-500/30", 
+          glowColor: "shadow-[0_0_15px_rgba(34,197,94,0.3)]",
+          accentColor: "text-green-400"
+        };
+      case "cyan":
+        return { 
+          bgGradient: "bg-gradient-to-br from-cyan-900/80 to-cyan-700/40",
+          borderColor: "border-cyan-500/30", 
+          glowColor: "shadow-[0_0_15px_rgba(6,182,212,0.3)]",
+          accentColor: "text-cyan-400"
+        };
+      default:
+        return { 
+          bgGradient: "bg-gradient-to-br from-blue-900/80 to-blue-700/40",
+          borderColor: "border-blue-500/30", 
+          glowColor: "shadow-[0_0_15px_rgba(59,130,246,0.3)]",
+          accentColor: "text-blue-400"
+        };
+    }
+  }
+
+  // Handle click on external link
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8, rotateY: 0 }}
+      animate={{ 
+        opacity: 1, 
+        scale: 1, 
+        rotateY: 180,
+        transition: { duration: 0.5, ease: "easeInOut" }
+      }}
+      exit={{ opacity: 0, scale: 0.8, rotateY: 0 }}
+      className="w-[400px] h-[400px] mx-auto"
+    >
+      <div
+        className={`w-full h-full rounded-xl glass-card ${colorScheme.bgGradient} ${colorScheme.borderColor} ${colorScheme.glowColor} border-opacity-70 p-8 flex flex-col justify-center items-center`}
+        onClick={(e) => e.stopPropagation()}
+        style={{ transform: "rotateY(180deg)" }}
+      >
+        <div className={`${colorScheme.accentColor} mb-6`}>
+          <FileText className="h-10 w-10" />
+        </div>
+        
+        <h3 className="text-2xl font-bold mb-3 text-white text-center">
+          {certification.name}
+        </h3>
+        
+        <p className="text-white/90 text-lg text-center mb-2">
+          {certification.organization}
+        </p>
+        
+        <p className={`${colorScheme.accentColor} text-base font-medium mb-6`}>
+          {certification.date}
+        </p>
+        
+        <ScrollArea className="h-32 w-full mb-6">
+          <p className="text-white/90 text-sm text-center mb-4">
+            {certification.description}
+          </p>
+        </ScrollArea>
+        
+        <a 
+          href={certification.verificationUrl || "#"} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          onClick={handleLinkClick}
+          className="mt-auto"
+        >
+          <Button 
+            variant="outline" 
+            className={`${colorScheme.accentColor} ${colorScheme.borderColor} hover:bg-white/10`}
+          >
+            <Book className="mr-2 h-4 w-4" />
+            View Certificate
+            <ExternalLink className="ml-1 h-3 w-3" />
+          </Button>
+        </a>
+      </div>
+    </motion.div>
   );
 };
 
