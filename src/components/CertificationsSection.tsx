@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Book, Award, FileText, ExternalLink } from "lucide-react"; 
@@ -304,7 +305,10 @@ const CertificationsSection: React.FC = () => {
             if (!open) setSelectedCertification(null);
           }}
         >
-          <DialogContent className="p-0 border-0 max-w-md bg-transparent shadow-none" hideCloseButton>
+          <DialogContent 
+            className="p-0 border-0 max-w-md bg-transparent shadow-none" 
+            // The CSS has been modified to not display the close button at all
+          >
             <DetailedCertificateView 
               certification={selectedCertification}
               onClose={() => setIsDetailedViewOpen(false)}
