@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, Book, FileText, Globe, Rocket } from "lucide-react";
@@ -193,9 +192,6 @@ const RadialInitiativesShowcase: React.FC = () => {
                 const iconRadius = (innerRadius + outerRadius) / 2;
                 const iconX = centerX + iconRadius * Math.cos(iconAngle);
                 const iconY = centerY + iconRadius * Math.sin(iconAngle);
-
-                const textAngle = iconAngle + (iconAngle > Math.PI / 2 && iconAngle < 3 * Math.PI / 2 ? Math.PI : 0);
-                const textAlign = iconAngle > Math.PI / 2 && iconAngle < 3 * Math.PI / 2 ? 'end' : 'start';
 
                 const IconComponent = initiative.icon;
 
