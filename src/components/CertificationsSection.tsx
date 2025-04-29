@@ -1,9 +1,11 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Book, Award, FileText, ExternalLink } from "lucide-react"; 
 import { ScrollArea } from "./ui/scroll-area";
 import { Button } from "./ui/button";
-import { Dialog, DialogContent, DialogOverlay, DialogPortal } from "./ui/dialog";
+import { Dialog } from "./ui/dialog";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 
 interface Certification {
   id: number;
@@ -321,12 +323,15 @@ const CustomDialogContent: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   return (
-    <DialogPortal>
-      <DialogOverlay />
-      <DialogContent className="p-0 border-0 max-w-md bg-transparent shadow-none">
+    <DialogPrimitive.Portal>
+      <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+      <DialogPrimitive.Content 
+        className="fixed left-[50%] top-[50%] z-50 w-full max-w-md translate-x-[-50%] translate-y-[-50%] p-0 border-0 bg-transparent shadow-none duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]"
+      >
         {children}
-      </DialogContent>
-    </DialogPortal>
+        {/* Close button explicitly removed */}
+      </DialogPrimitive.Content>
+    </DialogPrimitive.Portal>
   );
 };
 
