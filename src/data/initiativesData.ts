@@ -14,6 +14,7 @@ export interface Initiative {
   description: string;
   color: string;
   slides: InitiativeSlide[];
+  link?: string;
 }
 
 // Sample data for 5 initiatives
@@ -21,25 +22,26 @@ export const initiatives: Initiative[] = [
   {
     id: 1,
     title: "India Creates Club",
-    shortTitle: "Community",
+    shortTitle: "Product Prototype",
     icon: Globe,
-    description: "A community platform for tech creators to connect in their city, fostering collaboration and innovation across India. The platform has successfully created networks in multiple metropolitan areas.",
+    description: "The platform is a test to validate hypothesis on building tech ecosystems via showcase & community.",
     color: "#9b87f5", // Purple
     slides: [
       {
         image: "/lovable-uploads/6d243cad-de8a-4798-be27-0bfdd371a664.png",
-        caption: "Building local tech communities across India"
+        caption: "Building local tech communities within cities"
       },
       {
         image: "/lovable-uploads/6d243cad-de8a-4798-be27-0bfdd371a664.png",
-        caption: "Connecting creators through meaningful events"
+        caption: "Built the project from concept to a functional prototype"
       }
-    ]
+    ],
+    link: "https://indiacreates.club"
   },
   {
     id: 2,
     title: "Tiffin Service in Dubai",
-    shortTitle: "Food Service",
+    shortTitle: "Service Launch",
     icon: Award,
     description: "Launched a successful tiffin service for a restaurant in Dubai, securing 14 subscriptions in the first week of operation with innovative marketing and quality food delivery.",
     color: "#00b3ff", // Blue
@@ -63,7 +65,7 @@ export const initiatives: Initiative[] = [
     color: "#F97316", // Orange
     slides: [
       {
-        image: "/lovable-uploads/b2a3246c-bb6a-4a7e-a589-f790d77082c7.png",
+        image: "/lovable-uploads/7ab8d295-7a41-4ab8-ae07-81f3d64eaa4c.png",
         caption: "Transforming traditional retail into D2C powerhouse"
       },
       {
@@ -77,16 +79,16 @@ export const initiatives: Initiative[] = [
     title: "Education",
     shortTitle: "Education",
     icon: Book,
-    description: "Conducted a series of educational workshops aimed at emerging entrepreneurs, focusing on sustainable business practices and innovative financing models.",
+    description: "My journey through Engineering, MBA, campus engagement and various internships built a foundation for practical business leadership",
     color: "#0EA5E9", // Sky Blue
     slides: [
       {
         image: "/lovable-uploads/57e789a0-b842-4841-b75b-fe95e07a06f2.png",
-        caption: "Empowering the next generation of entrepreneurs"
+        caption: "MBA from IMT Dubai and Ghaziabad, as part of Dual Country Program"
       },
       {
         image: "/lovable-uploads/fe0ea07f-241c-4de9-97fe-42e9b4da1a00.png",
-        caption: "Hands-on learning experiences for real-world application"
+        caption: "Bachelors in Civil Engineering"
       }
     ]
   },

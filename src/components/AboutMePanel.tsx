@@ -29,9 +29,11 @@ const AboutMePanel: React.FC = () => {
             className="flex justify-center"
           >
             <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-neon/30 glow-sm">
-              <div className="w-full h-full bg-neon/10 flex items-center justify-center text-neon">
-                VP
-              </div>
+              <img 
+                src="/lovable-uploads/3100b1ae-2d7e-4d43-ab1e-f47ec6e91d96.png"
+                alt="Vibhor Pravin" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
           
@@ -42,16 +44,16 @@ const AboutMePanel: React.FC = () => {
             className="text-white/90 space-y-4"
           >
             <p>
-              A passionate professional with expertise in revenue generation, customer success, and product management.
+              I've built my career at the intersection of strategy, client growth, and revenue innovation—turning untapped potential into tangible results. With a track record spanning Ed-Tech, Finance, and SaaS, I'm eager to bring this expertise to your team.
             </p>
             <p>
-              With over a decade of experience in the tech industry, I specialize in driving business growth through strategic initiatives and customer-centric approaches.
+              As a Client Growth Partner, I drove revenue growth for Fortune 2000 clients in EMEA and APAC by creating GTM strategies, defining ICPs, and building pipelines that expanded TAM and delivered transformative business results.
             </p>
             <p>
-              My focus is on developing innovative solutions that meet business needs while ensuring exceptional user experiences. I excel at bridging the gap between technical and non-technical stakeholders.
+              At ICICI Bank, I managed corporate portfolios and sharpened my client engagement skills, while at Cerebry, I crafted pricing strategies and built sales pipelines that fueled revenue growth. At Quolum, I bridged the gap between product and customer needs, driving adoption and delivering value to SaaS users.
             </p>
             <p>
-              I am dedicated to continuous learning and staying ahead of industry trends to deliver cutting-edge strategies that drive meaningful results.
+              With an MBA, a Bachelor of Technology, and hands-on experience scaling opportunities across regions and industries, I thrive on solving complex problems and creating pathways for growth. I'd love the chance to hone my skills in strategy, execution, and client success aligning with organisations' vision and goals.
             </p>
           </motion.div>
           

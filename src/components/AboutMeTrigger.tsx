@@ -22,7 +22,9 @@ const AboutMeTrigger: React.FC = () => {
     <>
       {/* Resume Button */}
       <motion.a 
-        href="/resume.pdf" 
+        href="https://drive.google.com/file/d/1bylxuX6auDFSX87PIiTZyc5v5bDruHlH/view?usp=sharing" 
+        target="_blank"
+        rel="noopener noreferrer"
         download="Vibhor_Pravin_Resume.pdf"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -45,7 +47,7 @@ const AboutMeTrigger: React.FC = () => {
       <div className="fixed top-20 right-5 flex gap-4 z-40">
         {/* LinkedIn Icon */}
         <motion.a
-          href="https://linkedin.com/in/" 
+          href="https://www.linkedin.com/in/vibhorpravin/" 
           target="_blank"
           rel="noopener noreferrer"
           className="w-10 h-10 flex items-center justify-center glass rounded-full"

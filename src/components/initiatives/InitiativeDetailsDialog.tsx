@@ -67,7 +67,18 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
                 className: "w-5 h-5 text-white" 
               })}
             </div>
-            <h3 className="text-2xl font-bold text-white">{initiative.title}</h3>
+            {initiative.link ? (
+              <a 
+                href={initiative.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-2xl font-bold text-white hover:text-neon transition-colors"
+              >
+                {initiative.title}
+              </a>
+            ) : (
+              <h3 className="text-2xl font-bold text-white">{initiative.title}</h3>
+            )}
           </div>
           
           <p className="text-white/80 mb-6">{initiative.description}</p>
