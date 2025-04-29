@@ -76,7 +76,7 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
             <Carousel 
               className="w-full"
               opts={{
-                startIndex: slideIndex
+                initial: slideIndex
               }}
               setApi={(api) => {
                 api?.on('select', () => {
