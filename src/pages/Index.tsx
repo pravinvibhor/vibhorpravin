@@ -3,7 +3,7 @@ import React from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
 import HeroSection from "../components/HeroSection";
 import ExperienceTimeline from "../components/ExperienceTimeline";
-import ProjectsShowcase from "../components/ProjectsShowcase";
+import RadialInitiativesShowcase from "../components/RadialInitiativesShowcase";
 import CertificationsSection from "../components/CertificationsSection";
 
 const Index = () => {
@@ -12,7 +12,7 @@ const Index = () => {
       <ParticlesBackground />
       <HeroSection />
       <ExperienceTimeline />
-      <ProjectsShowcase />
+      <RadialInitiativesShowcase />
       <CertificationsSection />
     </div>
   );
