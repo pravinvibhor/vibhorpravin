@@ -75,8 +75,14 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
           <div className="mb-4">
             <Carousel 
               className="w-full"
-              onSelect={(index) => setSlideIndex(index)}
-              defaultIndex={slideIndex}
+              opts={{
+                initial: slideIndex
+              }}
+              setApi={(api) => {
+                api?.on('select', () => {
+                  setSlideIndex(api.selectedScrollSnap());
+                });
+              }}
             >
               <CarouselContent>
                 {initiative.slides.map((slide, index) => (
