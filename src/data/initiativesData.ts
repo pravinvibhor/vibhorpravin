@@ -24,7 +24,7 @@ export const initiatives: Initiative[] = [
     title: "India Creates Club",
     shortTitle: "Product Prototype",
     icon: Globe,
-    description: "The platform is a test to validate hypothesis on building tech ecosystems via showcase & community.",
+    description: "Built a platform to address tech peer discovery gap in Indian metropolitan cities. The platform is a test to validate hypothesis on building tech ecosystems via showcase & community.",
     color: "#9b87f5", // Purple
     slides: [
       {
@@ -43,7 +43,7 @@ export const initiatives: Initiative[] = [
     title: "Tiffin Service in Dubai",
     shortTitle: "Service Launch",
     icon: Award,
-    description: "Launched a successful tiffin service for a restaurant in Dubai, securing 14 subscriptions in the first week of operation with innovative marketing and quality food delivery.",
+    description: "Launched a successful tiffin service for a restaurant in Dubai assessing the market and its demand for their offerings, and implemented strategy and pricing for quality meal plans.",
     color: "#00b3ff", // Blue
     slides: [
       {
@@ -61,7 +61,7 @@ export const initiatives: Initiative[] = [
     title: "Tata's Leather Strategy for D2C",
     shortTitle: "D2C Strategy",
     icon: FileText,
-    description: "Developed comprehensive E-commerce and subscription Business Model for Tata's Direct-to-Consumer Venture, revolutionizing their approach to leather goods marketing.",
+    description: "Developed comprehensive E-commerce and subscription Business Model, in Tata's larger approach to Direct-to-Consumer venture, for their leather vertical.",
     color: "#F97316", // Orange
     slides: [
       {
