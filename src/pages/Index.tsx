@@ -13,12 +13,12 @@ const Index = () => {
       <HeroSection />
       <ExperienceTimeline />
       
-      {/* Side-by-side container for Initiatives and Certifications */}
-      <div className="flex flex-col lg:flex-row max-w-[2000px] mx-auto mt-8 mb-12">
-        <div className="w-full lg:w-1/2 lg:pr-4">
+      {/* Stacked container for Initiatives and Certifications */}
+      <div className="max-w-[2000px] mx-auto mt-8 mb-12 px-4">
+        <div className="w-full mb-16">
           <RadialInitiativesShowcase />
         </div>
-        <div className="w-full lg:w-1/2 lg:pl-4">
+        <div className="w-full">
           <CertificationsSection />
         </div>
       </div>

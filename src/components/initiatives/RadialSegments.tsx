@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Initiative } from "@/data/initiativesData";
@@ -17,18 +16,18 @@ const RadialSegments: React.FC<RadialSegmentsProps> = ({
   onInitiativeClick,
 }) => {
   // Radial segment positioning calculations
-  const centerX = 200;
-  const centerY = 200;
-  const innerRadius = 60;
-  const outerRadius = 140;
+  const centerX = 250;
+  const centerY = 250;
+  const innerRadius = 80;
+  const outerRadius = 180;
   const segmentCount = initiatives.length;
   const gapAngle = 10; // Gap in degrees between segments
   const segmentAngle = (360 - (segmentCount * gapAngle)) / segmentCount;
   const startAngle = -90 - (segmentAngle / 2); // Start from top, adjusted for segment width
 
   return (
-    <div className="relative w-full max-w-[400px] h-[400px] hidden lg:block mt-6">
-      <svg viewBox="0 0 400 400" className="w-full h-full">
+    <div className="relative w-full max-w-[500px] h-[500px] hidden lg:block mt-6 mx-auto">
+      <svg viewBox="0 0 500 500" className="w-full h-full">
         {initiatives.map((initiative, index) => {
           const angleStart = startAngle + (index * (segmentAngle + gapAngle));
           const angleEnd = angleStart + segmentAngle;
