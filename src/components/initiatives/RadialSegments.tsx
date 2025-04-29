@@ -88,9 +88,9 @@ const RadialSegments: React.FC<RadialSegmentsProps> = ({
           const textClassName = `text-white ${isServiceLaunch ? 'text-xs' : 'text-sm'} font-medium text-center`;
           
           // Special positioning for "Service Launch" text
-          const textX = isServiceLaunch ? iconX - 40 : iconX - 60;
-          const textY = isServiceLaunch ? iconY - 10 : iconY - 5;
-          const textWidth = isServiceLaunch ? 80 : 120;
+          const textX = isServiceLaunch ? iconX - 35 : iconX - 60;
+          const textY = isServiceLaunch ? iconY - 5 : iconY - 5;
+          const textWidth = isServiceLaunch ? 70 : 120;
 
           return (
             <g key={initiative.id} className="cursor-pointer">

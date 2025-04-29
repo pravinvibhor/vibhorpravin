@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dialog } from "@/components/ui/dialog";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
@@ -41,6 +41,13 @@ const InitiativeDetailsContent: React.FC<{
 
 const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open, onClose, initiative }) => {
   const [slideIndex, setSlideIndex] = useState(0);
+  
+  // Reset slide index to 0 when dialog opens or initiative changes
+  useEffect(() => {
+    if (open) {
+      setSlideIndex(0);
+    }
+  }, [open, initiative]);
   
   if (!initiative) return null;
   
