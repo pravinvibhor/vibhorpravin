@@ -63,6 +63,7 @@ const CertificationsSection: React.FC = () => {
         <CertificationsCarousel
           certifications={certifications}
           activeIndex={activeIndex}
+          setActiveIndex={setActiveIndex}
           isDetailedViewOpen={isDetailedViewOpen}
           onCardClick={handleCardClick}
         />

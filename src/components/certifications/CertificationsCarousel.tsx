@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Certification } from "./types";
 import CertificationCard from "./CertificationCard";
@@ -7,6 +7,7 @@ import CertificationCard from "./CertificationCard";
 interface CertificationsCarouselProps {
   certifications: Certification[];
   activeIndex: number;
+  setActiveIndex: (index: number) => void;
   isDetailedViewOpen: boolean;
   onCardClick: (card: Certification & { position: number }, e: React.MouseEvent) => void;
 }
@@ -14,9 +15,81 @@ interface CertificationsCarouselProps {
 const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
   certifications,
   activeIndex,
+  setActiveIndex,
   isDetailedViewOpen,
   onCardClick
 }) => {
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const handleSwipe = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    const diffX = touchStartX.current - touchEndX.current;
+    const threshold = 50; // Minimum swipe distance
+    
+    if (Math.abs(diffX) > threshold) {
+      if (diffX > 0) {
+        // Swiped left
+        setActiveIndex((prev) => 
+          prev + 1 >= certifications.length ? 0 : prev + 1
+        );
+      } else {
+        // Swiped right
+        setActiveIndex((prev) => 
+          prev - 1 < 0 ? certifications.length - 1 : prev - 1
+        );
+      }
+    }
+    
+    // Reset values
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+    };
+    
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndX.current = e.changedTouches[0].clientX;
+      handleSwipe();
+    };
+    
+    const handleMouseDown = (e: MouseEvent) => {
+      touchStartX.current = e.clientX;
+      
+      const handleMouseUp = (e: MouseEvent) => {
+        touchEndX.current = e.clientX;
+        handleSwipe();
+        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('mousemove', handleMouseMove);
+      };
+      
+      const handleMouseMove = (e: MouseEvent) => {
+        // Optional: Add drag visual feedback if needed
+      };
+      
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('mousemove', handleMouseMove);
+    };
+    
+    container.addEventListener('touchstart', handleTouchStart);
+    container.addEventListener('touchend', handleTouchEnd);
+    container.addEventListener('mousedown', handleMouseDown);
+    
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchend', handleTouchEnd);
+      container.removeEventListener('mousedown', handleMouseDown);
+    };
+  }, [certifications.length, setActiveIndex]);
+  
   const getVisibleCards = () => {
     const visibleCards = [];
     for (let i = 0; i < 5; i++) {
@@ -30,7 +103,7 @@ const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
   };
 
   return (
-    <div className="relative h-[400px] perspective-1000 mt-2">
+    <div ref={containerRef} className="relative h-[400px] perspective-1000 mt-2 touch-none">
       <div className="preserve-3d relative w-full h-full">
         <AnimatePresence mode="sync">
           {getVisibleCards().map((card) => (

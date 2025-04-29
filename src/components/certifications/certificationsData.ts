@@ -4,65 +4,56 @@ import { Certification } from "./types";
 export const certifications: Certification[] = [
   {
     id: 1,
-    name: "Product Management Certification",
-    organization: "Product School",
-    date: "2023",
-    description: "Comprehensive product management strategies and methodologies.",
+    name: "Behavioral Finance",
+    organization: "Duke University",
+    date: "2020",
+    description: "Understand bias to better financial decision making",
     colorScheme: "blue",
-    verificationUrl: "https://example.com/certificate/1"
+    verificationUrl: "https://www.coursera.org/account/accomplishments/verify/U9WUJJJY3V85"
   },
   {
     id: 2,
-    name: "Revenue Operations Certification",
-    organization: "HubSpot Academy",
-    date: "2023",
-    description: "Advanced revenue operations and business growth strategies.",
+    name: "Lean Six Sigma Green Belt (ICGB)",
+    organization: "KPMG India",
+    date: "2019",
+    description: "Drive efficiency and quality using data",
     colorScheme: "purple",
-    verificationUrl: "https://example.com/certificate/2"
+    verificationUrl: "https://drive.google.com/file/d/1-f3kaO2ppny-fD5N0kDNmUZ4lteshX_J/view"
   },
   {
     id: 3,
-    name: "Customer Success Management",
-    organization: "SuccessCOACH",
-    date: "2022",
-    description: "Customer retention and success strategies for SaaS businesses.",
+    name: "Market Research and Consumer Behavior",
+    organization: "IE Business School",
+    date: "2020",
+    description: "Comprehensive market insights to drive effective marketing strategies",
     colorScheme: "teal",
-    verificationUrl: "https://example.com/certificate/3"
+    verificationUrl: "https://www.coursera.org/account/accomplishments/verify/PE688NS2KZVC"
   },
   {
     id: 4,
-    name: "Digital Marketing Specialist",
-    organization: "Google Digital Garage",
-    date: "2022",
-    description: "Digital marketing fundamentals and campaign optimization.",
+    name: "The Future of Payment Technologies",
+    organization: "University of Michigan",
+    date: "2020",
+    description: "Innovation in payment ecosystem and building tech value proposition",
     colorScheme: "green",
-    verificationUrl: "https://example.com/certificate/4"
+    verificationUrl: "https://www.coursera.org/account/accomplishments/verify/2TMWNA4Z3TM3"
   },
   {
     id: 5, 
-    name: "Data Analytics Fundamentals",
-    organization: "IBM",
-    date: "2021",
-    description: "Core data analytics principles and visualization techniques.",
+    name: "An Introduction to Consumer Neuroscience & Neuromarketing",
+    organization: "Copenhagen Business School",
+    date: "2020",
+    description: "Insight on unconscious consumer choice drivers",
     colorScheme: "cyan",
-    verificationUrl: "https://example.com/certificate/5"
+    verificationUrl: "https://www.coursera.org/account/accomplishments/verify/9LJ8H6Z8B2SJ"
   },
   {
     id: 6,
-    name: "Agile Project Management",
-    organization: "Scrum Alliance",
-    date: "2021",
-    description: "Agile methodologies and scrum master certification.",
-    colorScheme: "blue",
-    verificationUrl: "https://example.com/certificate/6"
-  },
-  {
-    id: 7,
-    name: "Business Strategy Fundamentals",
-    organization: "Harvard Business School Online",
+    name: "Design Thinking for Innovation",
+    organization: "University of Virginia Darden School of Business",
     date: "2020",
-    description: "Strategic business planning and competitive analysis.",
-    colorScheme: "purple",
-    verificationUrl: "https://example.com/certificate/7"
+    description: "Master identification and creation of opportunity, ideas, outcomes",
+    colorScheme: "blue",
+    verificationUrl: "https://www.coursera.org/account/accomplishments/verify/DENSJ4ALRDBY"
   }
 ];

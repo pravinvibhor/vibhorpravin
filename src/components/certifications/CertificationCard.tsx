@@ -68,14 +68,13 @@ const CertificationCard: React.FC<CertificationCardProps> = ({
           <>
             <h3 className="text-xl font-medium mb-3 text-white text-center">{card.name}</h3>
             <p className="text-white/70 text-sm text-center mb-2">{card.organization}</p>
-            <p className={`${colorScheme.accentColor} text-xs font-medium`}>{card.date}</p>
           </>
         ) : isAdjacent ? (
           <>
             <h3 className="text-base font-medium mb-1 text-white/80 text-center truncate w-full">
               {card.name}
             </h3>
-            <p className={`${colorScheme.accentColor} text-xs`}>{card.date}</p>
+            <p className="text-white/60 text-xs text-center truncate w-full">{card.organization}</p>
           </>
         ) : (
           <h3 className="text-sm font-medium text-white/50 text-center truncate w-full">
