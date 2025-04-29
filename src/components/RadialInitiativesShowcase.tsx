@@ -133,31 +133,31 @@ const RadialInitiativesShowcase: React.FC = () => {
   };
 
   // Radial segment positioning calculations
-  const centerX = 250;
-  const centerY = 250;
-  const innerRadius = 80;
-  const outerRadius = 180;
+  const centerX = 200;
+  const centerY = 200;
+  const innerRadius = 60;
+  const outerRadius = 140;
   const segmentCount = initiatives.length;
   const gapAngle = 10; // Gap in degrees between segments
   const segmentAngle = (360 - (segmentCount * gapAngle)) / segmentCount;
   const startAngle = -90 - (segmentAngle / 2); // Start from top, adjusted for segment width
 
   return (
-    <section className="py-12 md:py-20 px-4 md:px-10 lg:px-20" id="initiatives" aria-label="Initiatives and Impact">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-12 md:py-16 px-4 relative overflow-hidden" id="initiatives" aria-label="Initiatives and Impact">
+      <div className="max-w-full mx-auto">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold mb-8 text-white text-center"
+          className="text-3xl md:text-4xl font-bold mb-8 text-white text-center lg:text-left"
         >
           Initiatives & <span className="text-neon">Impact</span>
         </motion.h2>
         
-        <div className="flex justify-center mb-12">
-          <div className="relative w-[500px] h-[500px] hidden md:block">
-            <svg viewBox="0 0 500 500" className="w-full h-full">
+        <div className="flex justify-center mb-6">
+          <div className="relative w-full max-w-[400px] h-[400px] hidden md:block">
+            <svg viewBox="0 0 400 400" className="w-full h-full">
               {initiatives.map((initiative, index) => {
                 const angleStart = startAngle + (index * (segmentAngle + gapAngle));
                 const angleEnd = angleStart + segmentAngle;

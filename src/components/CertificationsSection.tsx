@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Book, Award, FileText, ExternalLink } from "lucide-react"; 
@@ -182,22 +181,22 @@ const CertificationsSection: React.FC = () => {
 
   return (
     <section 
-      className="py-20 px-4 md:px-10 lg:px-20 relative overflow-hidden" 
+      className="py-12 md:py-16 px-4 relative overflow-hidden" 
       id="certifications"
     >
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center lg:text-left">
             <span className="text-neon">Certifications</span>
           </h2>
         </motion.div>
 
-        <div className="relative h-[450px] perspective-1000 mt-16 md:mt-16">
+        <div className="relative h-[400px] perspective-1000 mt-8 md:mt-10">
           <div className="preserve-3d relative w-full h-full">
             <AnimatePresence mode="sync">
               {getVisibleCards().map((card) => {
@@ -209,12 +208,12 @@ const CertificationsSection: React.FC = () => {
                 return (
                 <motion.div
                   key={card.id}
-                  className={`absolute top-0 left-0 right-0 mx-auto w-[280px] h-[330px] cursor-pointer`}
+                  className={`absolute top-0 left-0 right-0 mx-auto w-[250px] sm:w-[280px] h-[330px] cursor-pointer`}
                   initial={{ opacity: 0 }}
                   animate={{ 
                     opacity: isDetailedViewOpen ? 0 : isEdge ? 0.5 : isAdjacent ? 0.8 : 1,
                     scale: isCenterCard ? 1.2 : isAdjacent ? 0.85 : 0.7,
-                    x: `${card.position * 240}px`,
+                    x: `${card.position * 200}px`,
                     y: isCenterCard ? -20 : 0,
                     zIndex: 5 - Math.abs(card.position) * 1,
                     filter: `brightness(${isCenterCard ? 1.1 : 1 - Math.abs(card.position) * 0.2})`,

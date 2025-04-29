@@ -12,8 +12,16 @@ const Index = () => {
       <ParticlesBackground />
       <HeroSection />
       <ExperienceTimeline />
-      <RadialInitiativesShowcase />
-      <CertificationsSection />
+      
+      {/* Side-by-side container for Initiatives and Certifications */}
+      <div className="flex flex-col lg:flex-row max-w-[2000px] mx-auto">
+        <div className="w-full lg:w-1/2">
+          <RadialInitiativesShowcase />
+        </div>
+        <div className="w-full lg:w-1/2">
+          <CertificationsSection />
+        </div>
+      </div>
     </div>
   );
 };
