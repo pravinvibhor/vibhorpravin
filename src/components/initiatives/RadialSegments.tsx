@@ -73,11 +73,15 @@ const RadialSegments: React.FC<RadialSegmentsProps> = ({
                 fill={`url(#gradient-${initiative.id})`}
                 stroke={hoveredInitiative === initiative.id ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.2)"}
                 strokeWidth="1"
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.9, transformOrigin: `${centerX}px ${centerY}px` }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  transformOrigin: `${centerX}px ${centerY}px`,
+                  filter: "drop-shadow(0 0 8px rgba(255,255,255,0.5))"
+                }}
                 onMouseEnter={() => setHoveredInitiative(initiative.id)}
                 onMouseLeave={() => setHoveredInitiative(null)}
                 onClick={() => onInitiativeClick(initiative.id)}
