@@ -5,11 +5,13 @@ import HeroSection from "../components/HeroSection";
 import ExperienceTimeline from "../components/ExperienceTimeline";
 import RadialInitiativesShowcase from "../components/RadialInitiativesShowcase";
 import CertificationsSection from "../components/CertificationsSection";
+import AboutMeTrigger from "../components/AboutMeTrigger";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <ParticlesBackground />
+      <AboutMeTrigger />
       <HeroSection />
       <ExperienceTimeline />
       
