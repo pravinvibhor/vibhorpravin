@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Certification } from "./types";
@@ -31,15 +30,13 @@ const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
     
     if (Math.abs(diffX) > threshold) {
       if (diffX > 0) {
-        // Swiped left
-        setActiveIndex((prev) => 
-          prev + 1 >= certifications.length ? 0 : prev + 1
-        );
+        // Swiped left - calculate the new index directly
+        const newIndex = activeIndex + 1 >= certifications.length ? 0 : activeIndex + 1;
+        setActiveIndex(newIndex);
       } else {
-        // Swiped right
-        setActiveIndex((prev) => 
-          prev - 1 < 0 ? certifications.length - 1 : prev - 1
-        );
+        // Swiped right - calculate the new index directly
+        const newIndex = activeIndex - 1 < 0 ? certifications.length - 1 : activeIndex - 1;
+        setActiveIndex(newIndex);
       }
     }
     
