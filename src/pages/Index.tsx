@@ -13,9 +13,9 @@ const Index = () => {
       <HeroSection />
       <ExperienceTimeline />
       
-      {/* Stacked container for Initiatives and Certifications */}
-      <div className="max-w-[2000px] mx-auto mt-8 mb-12 px-4">
-        <div className="w-full mb-16">
+      {/* Stacked container for Initiatives and Certifications with proper spacing */}
+      <div className="max-w-[2000px] mx-auto px-4">
+        <div className="w-full mb-8">
           <RadialInitiativesShowcase />
         </div>
         <div className="w-full">
