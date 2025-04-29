@@ -30,7 +30,7 @@ const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
   };
 
   return (
-    <div className="relative h-[400px] perspective-1000 mt-6">
+    <div className="relative h-[400px] perspective-1000 mt-2">
       <div className="preserve-3d relative w-full h-full">
         <AnimatePresence mode="sync">
           {getVisibleCards().map((card) => (
