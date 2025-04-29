@@ -27,7 +27,7 @@ const RadialSegments: React.FC<RadialSegmentsProps> = ({
   const startAngle = -90 - (segmentAngle / 2); // Start from top, adjusted for segment width
 
   return (
-    <div className="relative w-full max-w-[400px] h-[400px] hidden md:block mt-6">
+    <div className="relative w-full max-w-[400px] h-[400px] hidden lg:block mt-6">
       <svg viewBox="0 0 400 400" className="w-full h-full">
         {initiatives.map((initiative, index) => {
           const angleStart = startAngle + (index * (segmentAngle + gapAngle));
