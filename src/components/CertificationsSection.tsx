@@ -45,7 +45,7 @@ const CertificationsSection: React.FC = () => {
 
   return (
     <section 
-      className="py-16 md:py-20 px-4 relative overflow-hidden" 
+      className="pt-32 pb-16 px-4 relative overflow-hidden" 
       id="certifications"
     >
       <div className="max-w-full mx-auto">
@@ -55,7 +55,7 @@ const CertificationsSection: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
             <span className="text-neon">Certifications & Courses</span>
           </h2>
         </motion.div>

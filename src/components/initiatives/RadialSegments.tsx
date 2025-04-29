@@ -1,3 +1,4 @@
+
 import React from "react";
 import { motion } from "framer-motion";
 import { Initiative } from "@/data/initiativesData";
@@ -26,7 +27,7 @@ const RadialSegments: React.FC<RadialSegmentsProps> = ({
   const startAngle = -90 - (segmentAngle / 2); // Start from top, adjusted for segment width
 
   return (
-    <div className="relative w-full max-w-[500px] h-[500px] hidden lg:block mx-auto -mt-8">
+    <div className="relative w-full max-w-[500px] h-[500px] hidden lg:block mx-auto">
       <svg viewBox="0 0 500 500" className="w-full h-full">
         {initiatives.map((initiative, index) => {
           const angleStart = startAngle + (index * (segmentAngle + gapAngle));

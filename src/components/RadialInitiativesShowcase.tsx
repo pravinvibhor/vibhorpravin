@@ -30,12 +30,12 @@ const RadialInitiativesShowcase: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold text-white text-center mb-12"
+          className="text-3xl md:text-4xl font-bold text-white text-center mb-16"
         >
           Initiatives & <span className="text-neon">Impact</span>
         </motion.h2>
         
-        <div className="flex justify-center mt-2">
+        <div className="flex justify-center">
           {/* Desktop Radial View */}
           <RadialSegments 
             initiatives={initiatives}

@@ -15,7 +15,7 @@ const Index = () => {
       
       {/* Stacked container for Initiatives and Certifications with proper spacing */}
       <div className="max-w-[2000px] mx-auto px-4">
-        <div className="w-full mb-8">
+        <div className="w-full mb-20">
           <RadialInitiativesShowcase />
         </div>
         <div className="w-full">
