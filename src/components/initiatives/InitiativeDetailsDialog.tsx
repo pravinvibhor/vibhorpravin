@@ -113,6 +113,9 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
                             src={slide.image} 
                             alt={`Slide ${index + 1} for ${initiative.title}`} 
                             className="w-full h-full object-cover"
+                            loading="lazy"
+                            width="600"
+                            height="338"
                             draggable="false"
                           />
                         </div>

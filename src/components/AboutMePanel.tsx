@@ -33,6 +33,9 @@ const AboutMePanel: React.FC = () => {
                 src="/lovable-uploads/3100b1ae-2d7e-4d43-ab1e-f47ec6e91d96.png"
                 alt="Vibhor Pravin" 
                 className="w-full h-full object-cover"
+                width="128"
+                height="128"
+                loading="eager"
               />
             </div>
           </motion.div>
