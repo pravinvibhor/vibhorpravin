@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Certification } from "./types";
@@ -31,11 +30,13 @@ const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
     
     if (Math.abs(diffX) > threshold) {
       if (diffX > 0) {
-        // Swiped left - go to next slide
-        setActiveIndex((activeIndex + 1) % certifications.length);
+        // Swiped left - calculate the new index directly
+        const newIndex = activeIndex + 1 >= certifications.length ? 0 : activeIndex + 1;
+        setActiveIndex(newIndex);
       } else {
-        // Swiped right - go to previous slide
-        setActiveIndex((activeIndex - 1 + certifications.length) % certifications.length);
+        // Swiped right - calculate the new index directly
+        const newIndex = activeIndex - 1 < 0 ? certifications.length - 1 : activeIndex - 1;
+        setActiveIndex(newIndex);
       }
     }
     
@@ -50,10 +51,6 @@ const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
     
     const handleTouchStart = (e: TouchEvent) => {
       touchStartX.current = e.touches[0].clientX;
-    };
-    
-    const handleTouchMove = (e: TouchEvent) => {
-      // Optionally add visual feedback during swipe
     };
     
     const handleTouchEnd = (e: TouchEvent) => {
@@ -79,24 +76,21 @@ const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
       document.addEventListener('mousemove', handleMouseMove);
     };
     
-    // Add touch events specifically for mobile
-    container.addEventListener('touchstart', handleTouchStart, { passive: true });
-    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+    container.addEventListener('touchstart', handleTouchStart);
     container.addEventListener('touchend', handleTouchEnd);
     container.addEventListener('mousedown', handleMouseDown);
     
     return () => {
       container.removeEventListener('touchstart', handleTouchStart);
-      container.removeEventListener('touchmove', handleTouchMove);
       container.removeEventListener('touchend', handleTouchEnd);
       container.removeEventListener('mousedown', handleMouseDown);
     };
-  }, [certifications.length, activeIndex, setActiveIndex]);
+  }, [certifications.length, setActiveIndex]);
   
   const getVisibleCards = () => {
     const visibleCards = [];
     for (let i = 0; i < 5; i++) {
-      const index = (activeIndex + i - 2 + certifications.length) % certifications.length;
+      const index = (activeIndex + i) % certifications.length;
       visibleCards.push({
         ...certifications[index],
         position: i - 2
@@ -106,11 +100,7 @@ const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
   };
 
   return (
-    <div 
-      ref={containerRef} 
-      className="relative h-[400px] perspective-1000 mt-2 touch-none"
-      aria-label="Certification carousel, swipe left or right to navigate"
-    >
+    <div ref={containerRef} className="relative h-[400px] perspective-1000 mt-2 touch-none">
       <div className="preserve-3d relative w-full h-full">
         <AnimatePresence mode="sync">
           {getVisibleCards().map((card) => (
