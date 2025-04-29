@@ -32,7 +32,7 @@ export const initiatives: Initiative[] = [
         caption: "Building local tech communities within cities"
       },
       {
-        image: "/lovable-uploads/6d243cad-de8a-4798-be27-0bfdd371a664.png",
+        image: "/lovable-uploads/e012ccc2-f1ce-474b-b871-1833836997c6.png",
         caption: "Built the project from concept to a functional prototype"
       }
     ],
@@ -87,7 +87,7 @@ export const initiatives: Initiative[] = [
         caption: "MBA from IMT Dubai and Ghaziabad, as part of Dual Country Program"
       },
       {
-        image: "/lovable-uploads/fe0ea07f-241c-4de9-97fe-42e9b4da1a00.png",
+        image: "/lovable-uploads/ee9c608e-46c2-4ed9-8201-3700510af675.png",
         caption: "Bachelors in Civil Engineering"
       }
     ]

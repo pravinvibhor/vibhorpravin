@@ -82,6 +82,11 @@ const RadialSegments: React.FC<RadialSegmentsProps> = ({
           const iconY = centerY + iconRadius * Math.sin(iconAngle) + offsetY;
 
           const IconComponent = initiative.icon;
+          
+          // For Service Launch shortTitle, we need to adjust text position or layout
+          // We'll make the text slightly smaller for this specific segment
+          const isServiceLaunch = initiative.shortTitle === "Service Launch";
+          const textClassName = `text-white text-${isServiceLaunch ? 'xs' : 'sm'} font-medium text-center`;
 
           return (
             <g key={initiative.id} className="cursor-pointer">
@@ -142,7 +147,7 @@ const RadialSegments: React.FC<RadialSegmentsProps> = ({
                 className="pointer-events-none"
               >
                 <div className="flex items-center justify-center h-full">
-                  <p className="text-white text-sm font-medium text-center">
+                  <p className={textClassName}>
                     {initiative.shortTitle}
                   </p>
                 </div>

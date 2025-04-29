@@ -44,16 +44,16 @@ const AboutMePanel: React.FC = () => {
             className="text-white/90 space-y-4"
           >
             <p>
-              I've built my career at the intersection of strategy, client growth, and revenue innovation—turning untapped potential into tangible results. With a track record spanning Ed-Tech, Finance, and SaaS, I'm eager to bring this expertise to your team.
+              I've built a career at the intersection of strategy, client growth, and revenue innovation; turning untapped potential into tangible results, and always chasing the next 'Why hasn't anyone done this yet?'
             </p>
             <p>
-              As a Client Growth Partner, I drove revenue growth for Fortune 2000 clients in EMEA and APAC by creating GTM strategies, defining ICPs, and building pipelines that expanded TAM and delivered transformative business results.
+              My journey includes driving revenue for Fortune 2000 clients in consulting, establishing Customer Success department, and launching new services like the SaaS procurement offering. From managing corporate banking portfolios at ICICI Bank to decoding SaaS adoption patterns at Quolum, I've loved the challenge of making numbers move.
             </p>
             <p>
-              At ICICI Bank, I managed corporate portfolios and sharpened my client engagement skills, while at Cerebry, I crafted pricing strategies and built sales pipelines that fueled revenue growth. At Quolum, I bridged the gap between product and customer needs, driving adoption and delivering value to SaaS users.
+              Beyond corporate life, I kicked off India Creates Club to spotlight grassroots innovation in India's bustling cities and built this very site to house all my chaos in clean code. Armed with an MBA, a B.Tech, and a streak of "let's figure it out," I thrive on turning ideas into impact.
             </p>
             <p>
-              With an MBA, a Bachelor of Technology, and hands-on experience scaling opportunities across regions and industries, I thrive on solving complex problems and creating pathways for growth. I'd love the chance to hone my skills in strategy, execution, and client success aligning with organisations' vision and goals.
+              When I'm not wrangling strategies or building experiments, you'll find me grocery shopping, cooking, trying to find some underrated TV show, or pretending to be a minimalist while hoarding decade old items.
             </p>
           </motion.div>
           
