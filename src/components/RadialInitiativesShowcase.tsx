@@ -23,19 +23,19 @@ const RadialInitiativesShowcase: React.FC = () => {
     : null;
 
   return (
-    <section className="py-12 md:py-16 px-4 relative overflow-hidden" id="initiatives" aria-label="Initiatives and Impact">
+    <section className="py-8 md:py-12 px-4 relative overflow-hidden" id="initiatives" aria-label="Initiatives and Impact">
       <div className="max-w-full mx-auto">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold mb-8 text-white text-center lg:text-left"
+          className="text-3xl md:text-4xl font-bold text-white text-center lg:text-left"
         >
           Initiatives & <span className="text-neon">Impact</span>
         </motion.h2>
         
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center">
           {/* Desktop Radial View */}
           <RadialSegments 
             initiatives={initiatives}

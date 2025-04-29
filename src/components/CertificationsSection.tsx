@@ -181,7 +181,7 @@ const CertificationsSection: React.FC = () => {
 
   return (
     <section 
-      className="py-12 md:py-16 px-4 relative overflow-hidden" 
+      className="py-8 md:py-12 px-4 relative overflow-hidden" 
       id="certifications"
     >
       <div className="max-w-full mx-auto">
@@ -191,12 +191,12 @@ const CertificationsSection: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white text-center lg:text-left">
-            <span className="text-neon">Certifications</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white text-center lg:text-left">
+            <span className="text-neon">Certifications & Courses</span>
           </h2>
         </motion.div>
 
-        <div className="relative h-[400px] perspective-1000 mt-8 md:mt-10">
+        <div className="relative h-[400px] perspective-1000 mt-6">
           <div className="preserve-3d relative w-full h-full">
             <AnimatePresence mode="sync">
               {getVisibleCards().map((card) => {

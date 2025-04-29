@@ -17,7 +17,7 @@ const MobileInitiativeCards: React.FC<MobileInitiativeCardsProps> = ({
   onInitiativeClick,
 }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:hidden">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:hidden mt-6">
       {initiatives.map((initiative, index) => (
         <motion.div
           key={initiative.id}
