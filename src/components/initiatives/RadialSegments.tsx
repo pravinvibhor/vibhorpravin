@@ -33,53 +33,71 @@ const RadialSegments: React.FC<RadialSegmentsProps> = ({
           const angleStart = startAngle + (index * (segmentAngle + gapAngle));
           const angleEnd = angleStart + segmentAngle;
           
-          // Calculate the SVG arc path
-          const angleStartRad = (angleStart * Math.PI) / 180;
-          const angleEndRad = (angleEnd * Math.PI) / 180;
-          
-          const x1 = centerX + innerRadius * Math.cos(angleStartRad);
-          const y1 = centerY + innerRadius * Math.sin(angleStartRad);
-          const x2 = centerX + outerRadius * Math.cos(angleStartRad);
-          const y2 = centerY + outerRadius * Math.sin(angleStartRad);
-          const x3 = centerX + outerRadius * Math.cos(angleEndRad);
-          const y3 = centerY + outerRadius * Math.sin(angleEndRad);
-          const x4 = centerX + innerRadius * Math.cos(angleEndRad);
-          const y4 = centerY + innerRadius * Math.sin(angleEndRad);
+          // Calculate the SVG arc path based on whether it's hovered or not
+          const getPath = (isHovered: boolean) => {
+            // Apply outward movement effect on hover (10-15px outward)
+            const hoverOffset = isHovered ? 15 : 0;
+            
+            const currInnerRadius = innerRadius;
+            const currOuterRadius = outerRadius + hoverOffset;
+            
+            const angleStartRad = (angleStart * Math.PI) / 180;
+            const angleEndRad = (angleEnd * Math.PI) / 180;
+            
+            // Calculate midpoint angle for the outward movement direction
+            const midAngleRad = (angleStartRad + angleEndRad) / 2;
+            const offsetX = isHovered ? Math.cos(midAngleRad) * hoverOffset : 0;
+            const offsetY = isHovered ? Math.sin(midAngleRad) * hoverOffset : 0;
+            
+            const x1 = centerX + currInnerRadius * Math.cos(angleStartRad) + offsetX;
+            const y1 = centerY + currInnerRadius * Math.sin(angleStartRad) + offsetY;
+            const x2 = centerX + currOuterRadius * Math.cos(angleStartRad) + offsetX;
+            const y2 = centerY + currOuterRadius * Math.sin(angleStartRad) + offsetY;
+            const x3 = centerX + currOuterRadius * Math.cos(angleEndRad) + offsetX;
+            const y3 = centerY + currOuterRadius * Math.sin(angleEndRad) + offsetY;
+            const x4 = centerX + currInnerRadius * Math.cos(angleEndRad) + offsetX;
+            const y4 = centerY + currInnerRadius * Math.sin(angleEndRad) + offsetY;
 
-          // Arc flags - using 0 for small arc, 1 for large arc if needed
-          const arcSweep = segmentAngle > 180 ? 1 : 0;
-          
-          const path = [
-            `M ${x1} ${y1}`, // Move to start point
-            `L ${x2} ${y2}`, // Line to outer start
-            `A ${outerRadius} ${outerRadius} 0 ${arcSweep} 1 ${x3} ${y3}`, // Arc to outer end
-            `L ${x4} ${y4}`, // Line to inner end
-            `A ${innerRadius} ${innerRadius} 0 ${arcSweep} 0 ${x1} ${y1}`, // Arc back to start
-            'Z' // Close path
-          ].join(' ');
+            // Arc flags - using 0 for small arc, 1 for large arc if needed
+            const arcSweep = segmentAngle > 180 ? 1 : 0;
+            
+            return [
+              `M ${x1} ${y1}`, // Move to start point
+              `L ${x2} ${y2}`, // Line to outer start
+              `A ${currOuterRadius} ${currOuterRadius} 0 ${arcSweep} 1 ${x3} ${y3}`, // Arc to outer end
+              `L ${x4} ${y4}`, // Line to inner end
+              `A ${currInnerRadius} ${currInnerRadius} 0 ${arcSweep} 0 ${x1} ${y1}`, // Arc back to start
+              'Z' // Close path
+            ].join(' ');
+          };
 
-          // Calculate position for icon and text
+          // Calculate position for icon and text with hover effect
+          const isHovered = hoveredInitiative === initiative.id;
           const iconAngle = (angleStart + angleEnd) / 2 * Math.PI / 180;
           const iconRadius = (innerRadius + outerRadius) / 2;
-          const iconX = centerX + iconRadius * Math.cos(iconAngle);
-          const iconY = centerY + iconRadius * Math.sin(iconAngle);
+          const hoverOffset = isHovered ? 15 : 0;
+          const offsetX = isHovered ? Math.cos(iconAngle) * hoverOffset : 0;
+          const offsetY = isHovered ? Math.sin(iconAngle) * hoverOffset : 0;
+          const iconX = centerX + iconRadius * Math.cos(iconAngle) + offsetX;
+          const iconY = centerY + iconRadius * Math.sin(iconAngle) + offsetY;
 
           const IconComponent = initiative.icon;
 
           return (
             <g key={initiative.id} className="cursor-pointer">
               <motion.path
-                d={path}
+                d={getPath(isHovered)}
                 fill={`url(#gradient-${initiative.id})`}
-                stroke={hoveredInitiative === initiative.id ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.2)"}
+                stroke={isHovered ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.2)"}
                 strokeWidth="1"
                 initial={{ opacity: 0, scale: 0.9, transformOrigin: `${centerX}px ${centerY}px` }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
+                transition={{ 
+                  delay: index * 0.1, 
+                  duration: 0.5,
+                }}
                 whileHover={{ 
-                  scale: 1.05, 
-                  transformOrigin: `${centerX}px ${centerY}px`,
                   filter: "drop-shadow(0 0 8px rgba(255,255,255,0.5))"
                 }}
                 onMouseEnter={() => setHoveredInitiative(initiative.id)}

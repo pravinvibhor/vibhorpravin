@@ -8,8 +8,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 
 interface InitiativeDetailsDialogProps {
@@ -21,21 +19,19 @@ interface InitiativeDetailsDialogProps {
 // Custom Dialog Content component without close button
 const InitiativeDetailsContent: React.FC<{
   children: React.ReactNode;
-}> = ({ children }) => {
+  onClose: () => void;
+}> = ({ children, onClose }) => {
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" onClick={(e) => {
         // Allow clicking the overlay to close the dialog
         const target = e.target as HTMLElement;
         if (target.classList.contains('fixed')) {
-          const closeButton = document.querySelector('[data-radix-collection-item]');
-          if (closeButton instanceof HTMLElement) {
-            closeButton.click();
-          }
+          onClose();
         }
       }} />
       <DialogPrimitive.Content 
-        className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] p-0 border-0 bg-transparent shadow-none duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]"
+        className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] p-0 border-0 bg-transparent shadow-none duration-200"
       >
         {children}
       </DialogPrimitive.Content>
@@ -50,12 +46,16 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
   
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <InitiativeDetailsContent>
+      <InitiativeDetailsContent onClose={onClose}>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          className="glass-card p-6 max-w-xl mx-auto max-h-[80vh] overflow-hidden"
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ 
+            enter: { duration: 0.5, ease: "easeOut" },
+            exit: { duration: 0.15, ease: "linear" }
+          }}
+          className="glass-card p-6 max-w-xl mx-auto max-h-[80vh] overflow-hidden relative"
           style={{
             background: `linear-gradient(135deg, ${initiative.color}80 0%, ${initiative.color}40 100%)`,
             borderColor: "rgba(255,255,255,0.2)"
@@ -76,7 +76,8 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
             <Carousel 
               className="w-full"
               opts={{
-                startIndex: slideIndex
+                startIndex: slideIndex,
+                dragFree: true
               }}
               setApi={(api) => {
                 api?.on('select', () => {
@@ -101,6 +102,7 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
                             src={slide.image} 
                             alt={`Slide ${index + 1} for ${initiative.title}`} 
                             className="w-full h-full object-cover"
+                            draggable="false"
                           />
                         </div>
                         <p className="text-white text-sm text-center">{slide.caption}</p>
@@ -109,14 +111,10 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="flex justify-center gap-2 mt-4">
-                <CarouselPrevious className="relative inline-flex h-8 w-8 rounded-full border border-white/40" />
-                <CarouselNext className="relative inline-flex h-8 w-8 rounded-full border border-white/40" />
-              </div>
             </Carousel>
             
             {/* Slide indicator dots */}
-            <div className="flex justify-center gap-2 mt-3">
+            <div className="flex justify-center gap-2 mt-6">
               {initiative.slides.map((_, index) => (
                 <button
                   key={index}
@@ -131,6 +129,18 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
               ))}
             </div>
           </div>
+            
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
+            aria-label="Close dialog"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </motion.div>
       </InitiativeDetailsContent>
     </Dialog>
