@@ -1,10 +1,9 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Book, Award, FileText, ExternalLink } from "lucide-react"; 
 import { ScrollArea } from "./ui/scroll-area";
 import { Button } from "./ui/button";
-import { Dialog, DialogContent } from "./ui/dialog";
+import { Dialog, DialogContent, DialogOverlay, DialogPortal } from "./ui/dialog";
 
 interface Certification {
   id: number;
@@ -305,18 +304,29 @@ const CertificationsSection: React.FC = () => {
             if (!open) setSelectedCertification(null);
           }}
         >
-          <DialogContent 
-            className="p-0 border-0 max-w-md bg-transparent shadow-none" 
-            // The CSS has been modified to not display the close button at all
-          >
+          <CustomDialogContent>
             <DetailedCertificateView 
               certification={selectedCertification}
               onClose={() => setIsDetailedViewOpen(false)}
             />
-          </DialogContent>
+          </CustomDialogContent>
         </Dialog>
       )}
     </section>
+  );
+};
+
+// Custom DialogContent component that doesn't include the close button
+const CustomDialogContent: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  return (
+    <DialogPortal>
+      <DialogOverlay />
+      <DialogContent className="p-0 border-0 max-w-md bg-transparent shadow-none">
+        {children}
+      </DialogContent>
+    </DialogPortal>
   );
 };
 
