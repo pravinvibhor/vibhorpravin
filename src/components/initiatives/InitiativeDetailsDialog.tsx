@@ -9,6 +9,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import ImageOptimizer from "../ImageOptimizer";
 
 interface InitiativeDetailsDialogProps {
   open: boolean;
@@ -94,7 +95,7 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
             <Carousel 
               className="w-full"
               opts={{
-                startIndex: slideIndex,
+                startIndex: 0, // Always start from first slide
                 dragFree: true
               }}
               setApi={(api) => {
@@ -116,14 +117,13 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
                         className="flex flex-col gap-3 p-1"
                       >
                         <div className="aspect-video overflow-hidden rounded-lg">
-                          <img 
+                          <ImageOptimizer 
                             src={slide.image} 
                             alt={`Slide ${index + 1} for ${initiative.title}`} 
                             className="w-full h-full object-cover"
                             loading="lazy"
-                            width="600"
-                            height="338"
-                            draggable="false"
+                            width={600}
+                            height={338}
                           />
                         </div>
                         <p className="text-white text-sm text-center">{slide.caption}</p>

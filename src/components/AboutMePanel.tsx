@@ -56,7 +56,7 @@ const AboutMePanel: React.FC = () => {
               Beyond corporate life, I kicked off India Creates Club to spotlight grassroots innovation in India's bustling cities and built this very site to house all my chaos in clean code. Armed with an MBA, a B.Tech, and a streak of "let's figure it out," I thrive on turning ideas into impact.
             </p>
             <p>
-              When I'm not wrangling strategies or building experiments, you'll find me grocery shopping, cooking, trying to find some underrated TV show, or pretending to be a minimalist while hoarding decade old items.
+              When I'm not wrangling strategies or building experiments, you'll find me grocery shopping, cooking or trying to find some underrated TV show.
             </p>
           </motion.div>
           

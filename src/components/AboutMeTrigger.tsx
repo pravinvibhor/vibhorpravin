@@ -22,7 +22,7 @@ const AboutMeTrigger: React.FC = () => {
     <>
       {/* Resume Button */}
       <motion.a 
-        href="https://drive.google.com/file/d/1bylxuX6auDFSX87PIiTZyc5v5bDruHlH/view?usp=sharing" 
+        href="https://drive.google.com/file/d/1Qx5L3KVPp863Wtg104qw8xsqw52LmXP2/view?usp=sharing" 
         target="_blank"
         rel="noopener noreferrer"
         download="Vibhor_Pravin_Resume.pdf"
