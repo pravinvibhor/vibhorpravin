@@ -84,7 +84,7 @@ export const initiatives: Initiative[] = [
     slides: [
       {
         image: "/lovable-uploads/57e789a0-b842-4841-b75b-fe95e07a06f2.png",
-        caption: "MBA from IMT Dubai and Ghaziabad, as part of Dual Country Program"
+        caption: "MBA from IMT Dubai and IMT Ghaziabad - Dual Country Program"
       },
       {
         image: "/lovable-uploads/ee9c608e-46c2-4ed9-8201-3700510af675.png",
@@ -102,11 +102,11 @@ export const initiatives: Initiative[] = [
     slides: [
       {
         image: "/lovable-uploads/87ada3b7-f8a7-4dd3-97c1-3f2128da5388.png",
-        caption: "Was part of Cerebry to setup Customer Success department as its lead"
+        caption: "Was part of Cerebry think-tank to establish Customer Success department"
       },
       {
         image: "/lovable-uploads/2cf8ac9a-caf4-4032-8810-75ece424f19b.png",
-        caption: "The early stage start-up gave hands-on learning in a new sector"
+        caption: "The early-stage startup experience gave me hands-on exposure to the SaaS sector"
       }
     ]
   }

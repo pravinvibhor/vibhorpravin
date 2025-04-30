@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import ImageOptimizer from "./ImageOptimizer";
 
 interface TimelineItem {
   id: number;
@@ -131,7 +132,14 @@ const ExperienceTimeline: React.FC = () => {
               >
                 <div className="flex items-start gap-4 mb-6">
                   <div className="w-12 h-12 rounded-lg glass flex items-center justify-center">
-                    <img src={activeItem.logo} alt={activeItem.company} className="w-8 h-8" />
+                    <ImageOptimizer 
+                      src={activeItem.logo} 
+                      alt={activeItem.company} 
+                      className="w-8 h-8" 
+                      width={32}
+                      height={32}
+                      loading="lazy"
+                    />
                   </div>
                   <div>
                     <h3 className="text-2xl font-semibold text-white">{activeItem.role}</h3>

@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Initiative } from "@/data/initiativesData";
+import ImageOptimizer from "@/components/ImageOptimizer";
 
 interface MobileInitiativeCardsProps {
   initiatives: Initiative[];
