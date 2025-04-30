@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const HeroSection: React.FC = () => {
   const [displayText, setDisplayText] = useState("");
-  const fullText = "Consulting | Program Management | Generalist";
+  const fullText = "Sales | Program Management | Generalist";
   
   useEffect(() => {
     let index = 0;

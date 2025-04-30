@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Certification } from "./types";
@@ -86,7 +85,7 @@ const CertificationsCarousel: React.FC<CertificationsCarouselProps> = ({
       container.removeEventListener('touchend', handleTouchEnd);
       container.removeEventListener('mousedown', handleMouseDown);
     };
-  }, [certifications.length, activeIndex, setActiveIndex]);
+  }, [certifications.length, setActiveIndex]);
   
   const getVisibleCards = () => {
     const visibleCards = [];

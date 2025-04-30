@@ -2,7 +2,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import ImageOptimizer from "./ImageOptimizer";
 
 const AboutMePanel: React.FC = () => {
   return (
@@ -30,13 +29,13 @@ const AboutMePanel: React.FC = () => {
             className="flex justify-center"
           >
             <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-neon/30 glow-sm">
-              <ImageOptimizer 
+              <img 
                 src="/lovable-uploads/3100b1ae-2d7e-4d43-ab1e-f47ec6e91d96.png"
                 alt="Vibhor Pravin" 
                 className="w-full h-full object-cover"
-                width={128}
-                height={128}
-                priority={true}
+                width="128"
+                height="128"
+                loading="eager"
               />
             </div>
           </motion.div>
@@ -57,7 +56,7 @@ const AboutMePanel: React.FC = () => {
               Beyond corporate life, I kicked off India Creates Club to spotlight grassroots innovation in India's bustling cities and built this very site to house all my chaos in clean code. Armed with an MBA, a B.Tech, and a streak of "let's figure it out," I thrive on turning ideas into impact.
             </p>
             <p>
-              When I'm not wrangling strategies or building experiments, you'll find me grocery shopping, cooking or trying to find some underrated TV show.
+              When I'm not wrangling strategies or building experiments, you'll find me grocery shopping, cooking, trying to find some underrated TV show, or pretending to be a minimalist while hoarding decade old items.
             </p>
           </motion.div>
           

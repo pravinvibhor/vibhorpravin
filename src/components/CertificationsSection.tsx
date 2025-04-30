@@ -56,7 +56,7 @@ const CertificationsSection: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
-            <span className="text-white">Certifications & </span><span className="text-neon">Courses</span>
+            <span className="text-neon">Certifications & Courses</span>
           </h2>
         </motion.div>
 

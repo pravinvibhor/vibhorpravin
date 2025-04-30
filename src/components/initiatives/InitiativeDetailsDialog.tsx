@@ -9,7 +9,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import ImageOptimizer from "@/components/ImageOptimizer";
 
 interface InitiativeDetailsDialogProps {
   open: boolean;
@@ -117,13 +116,14 @@ const InitiativeDetailsDialog: React.FC<InitiativeDetailsDialogProps> = ({ open,
                         className="flex flex-col gap-3 p-1"
                       >
                         <div className="aspect-video overflow-hidden rounded-lg">
-                          <ImageOptimizer 
+                          <img 
                             src={slide.image} 
                             alt={`Slide ${index + 1} for ${initiative.title}`} 
                             className="w-full h-full object-cover"
                             loading="lazy"
-                            width={600}
-                            height={338}
+                            width="600"
+                            height="338"
+                            draggable="false"
                           />
                         </div>
                         <p className="text-white text-sm text-center">{slide.caption}</p>
